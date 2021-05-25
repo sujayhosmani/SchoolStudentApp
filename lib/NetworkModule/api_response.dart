@@ -1,20 +1,23 @@
-class ApiResponse<T> {
-  Status status;
+class CustomResponse<T> {
+  int Status;
+  T Data;
+  String Error;
 
-  T data;
+  CustomResponse({this.Status, this.Data, this.Error});
 
-  String message;
-
-  ApiResponse.loading(this.message) : status = Status.LOADING;
-
-  ApiResponse.completed(this.data) : status = Status.COMPLETED;
-
-  ApiResponse.error(this.message) : status = Status.ERROR;
-
-  @override
-  String toString() {
-    return "Status : $status \n Message : $message \n Data : $data";
+  factory CustomResponse.fromJson(Map<String, dynamic> json) {
+    return CustomResponse(
+        Status: json['Status'],
+        Error: json['Error'],
+        Data: json['Data']
+    );
   }
-}
 
-enum Status { LOADING, COMPLETED, ERROR }
+  Map<String, dynamic> toJson() =>
+      {
+        'Status': Status,
+        'Error': Error,
+        'Data': Data,
+      };
+
+}

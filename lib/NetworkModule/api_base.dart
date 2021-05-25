@@ -12,7 +12,7 @@ class APIBase{
 
   }
 
-  static final options = BaseOptions(
+  static final networkOptions = BaseOptions(
     baseUrl: baseURL,
     // connectTimeout: 5000,
     // receiveTimeout: 3000,

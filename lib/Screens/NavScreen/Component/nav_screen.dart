@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_guardian/Screens/ProfileScreen/Component/profile_screen.dart';
 
 
 class NavScreen extends StatefulWidget {
@@ -15,7 +16,7 @@ class _NavScreenState extends State<NavScreen> {
     Text("2"),
     Text("3"),
     Text('Index 3: Settings', style: optionStyle,),
-    Text('Index 3: Settings', style: optionStyle,),
+    ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {

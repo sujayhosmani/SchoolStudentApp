@@ -2,71 +2,65 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:my_guardian/Providers/global_provider.dart';
+import 'package:provider/provider.dart';
 import 'api_base.dart';
 import 'api_exception.dart';
+import 'api_response.dart';
 
 class DioClient {
-  static final Dio _singleton = Dio(APIBase.options);
+  static final DioClient _singleton = DioClient();
 
-  static Dio get instance => _singleton;
+  static DioClient get instance => _singleton;
 
-  Future<dynamic> fetchData(String url, {Map<String, String> params}) async {
-    var responseJson;
+  Future<CustomResponse> fetchData(BuildContext context, String url, {Map<String, String> params}) async {
+    CustomResponse responseJson;
+    Provider.of<GlobalProvider>(context, listen: false).setIsBusy(true, null);
     try {
-      final response = await Dio().get(url, queryParameters: params);
-      printResponse(response);
+      final response = await Dio().get(APIBase.baseURL + url);
+      print("the response:: " + response.statusCode.toString());
       responseJson = _returnResponse(response);
     } catch(e) {
-      throw FetchDataException(e.message);
+      print(e.toString());
     }
+    Provider.of<GlobalProvider>(context, listen: false).setIsBusy(false, responseJson?.Error);
     return responseJson;
   }
 
 
-  Future<dynamic> postData(String url, dynamic body) async {
+  Future<CustomResponse> postData(BuildContext context, String url, dynamic body) async {
+    // Provider.of<GlobalProvider>(context, listen: false).setIsBusy(true);
     var responseJson;
     try {
-      final response = await Dio().post(url, data: body);
+      final response = await Dio(APIBase.networkOptions).post(url, data: body);
       responseJson = _returnResponse(response);
     } catch(e) {
-      throw FetchDataException(e.message);
+      responseJson = CustomResponse(Data: null, Status: 0, Error: "Internal Error: " + e.message.toString());
     }
+    // Provider.of<GlobalProvider>(context, listen: false).setIsBusy(false);
     return responseJson;
   }
 
-  Future<dynamic> sendFiles(String url, dynamic body) async {
-    var responseJson;
-    try {
-      final response =
-      await Dio().post(url, data: body);
-      responseJson = _returnResponse(response);
-    } catch(e) {
-      throw FetchDataException(e.message);
-    }
-    return responseJson;
-  }
 
-  dynamic _returnResponse(Response response) {
+  CustomResponse _returnResponse(Response response) {
     switch (response.statusCode) {
       case 200:
-        var responseJson = json.decode(response.data.toString());
-        return responseJson;
+        CustomResponse res = CustomResponse.fromJson(response.data);
+        return res;
       case 400:
-        throw BadRequestException(response.data.toString());
+        return CustomResponse(Data: null, Status: 0, Error: "Bad Request: " + response.data.toString());
       case 401:
       case 403:
-        throw UnauthorisedException(response.data.toString());
+        return CustomResponse(Data: null, Status: 0, Error: "Unauthorized: " + response.data.toString());
       case 500:
       default:
-        throw FetchDataException(
-            'Error occured while Communication with Server with StatusCode : ${response.statusCode}');
-    }
-  }
+        try{
+          return  CustomResponse.fromJson(response.data);
+        }catch(e){
+          return CustomResponse(Data: null, Status: 0, Error: "Server Error: " + response.data.toString());
+        }
 
-  void printResponse(Response response) {
-    print(response);
-    print(response.data);
-    print(response.statusCode);
-    print(response.statusMessage);
+    }
   }
 }

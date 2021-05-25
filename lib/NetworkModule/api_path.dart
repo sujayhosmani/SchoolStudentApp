@@ -4,10 +4,10 @@ enum APIPath {
 }
 
 class APIPathHelper{
-  static String getValue(APIPath path){
+  static String getValue(APIPath path, String param){
     switch(path){
       case APIPath.fetch_student:
-        return "/login";
+        return "school/getByPh/" + param;
       default:
         return "";
     }
