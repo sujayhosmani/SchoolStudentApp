@@ -19,6 +19,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
 
   TextEditingController mUserName = TextEditingController();
+  TextEditingController mPassword = TextEditingController();
 
 
 
@@ -33,34 +34,35 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       body: Stack(
         children: [
-          Container(
-            width: double.infinity,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image.asset("assets/images/clogo.png", height: 100,),
-                SizedBox(height: 5,),
-                Text("My guardian", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87),),
-                SizedBox(height: 30,),
+          SingleChildScrollView(
+            child: Container(
+              margin: EdgeInsets.only(top: 100),
+              width: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset("assets/images/clogo.png", height: 100,),
+                  SizedBox(height: 5,),
+                  Text("My guardian", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87),),
+                  SizedBox(height: 30,),
 
-                SizedBox(height: 10,),
-                InputText(title: "Enter Username",),
-                InputText(title: "Password",isPassword: true,),
-                SizedBox(height: 20,),
-                Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(120),
-                        color: Colors.grey
-                    ),
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
+                  SizedBox(height: 10,),
+                  InputText(title: "Enter Username", mCtrl: mUserName,),
+                  InputText(title: "Password",isPassword: true,mCtrl: mPassword,),
+                  SizedBox(height: 20,),
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
 
-                        ),
-                        onPressed: (){onLoginClicked(context);},
-                        child: Text("Login")))
+                      ),
+                      onPressed: (){onLoginClicked(context);},
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
+                        child: Text("Login"),
+                      ))
 
-              ],
+                ],
+              ),
             ),
           ),
           Consumer<GlobalProvider>(builder: (context, global, child){
@@ -73,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void onLoginClicked(BuildContext context) async{
-    CustomResponse<Student> res = await Provider.of<StudentProvider>(context, listen: false).studentLogin(context, "8553655890", "login", "aNo");
+    CustomResponse<Student> res = await Provider.of<StudentProvider>(context, listen: false).studentLogin(context, mUserName.text, "login", "aNo");
     if(res.Status == 1 || res.Data != null){
       print(res.Data.Name);
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context){

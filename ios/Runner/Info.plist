@@ -28,6 +28,12 @@
     <key>NSMicrophoneUsageDescription</key>
     <string>$(PRODUCT_NAME) MyApp needs access to your microphone for meetings.</string>
 
+    <key>NSAppTransportSecurity</key>
+        <dict>
+                <key>NSAllowsArbitraryLoads</key>
+                <true/>
+        </dict>
+
 
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
