@@ -20,11 +20,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   TextEditingController mUserName = TextEditingController();
 
-  onLoginPressed(){
-    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context){
-      return HomeScreen();
-    }));
-  }
 
 
   @override
@@ -62,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: ElevatedButton.styleFrom(
 
                         ),
-                        onPressed: (){onLoginPressed();},
+                        onPressed: (){onLoginClicked(context);},
                         child: Text("Login")))
 
               ],
