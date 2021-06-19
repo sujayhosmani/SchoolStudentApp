@@ -22,7 +22,7 @@ class ErrorScreen extends StatelessWidget{
                 // title: Text(error,style: TextStyle(color: Colors.red),),
                 content: Padding(
                   padding: const EdgeInsets.only(top: 20),
-                  child: Text("user name does not exists"),
+                  child: Text(error),
                 ),
                 actions: [
                   FlatButton(

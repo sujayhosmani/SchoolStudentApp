@@ -1,24 +1,28 @@
 
-import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
 class APIBase{
   static String get baseURL {
     if (kReleaseMode) {
-      return "prod url here";
+      return "http://151.106.113.253/api/";
+      // return "http://20.197.31.247/api/";
     } else {
-      return "http://20.197.31.247/api/";
+      return "http://151.106.113.253/api/";
+      // return "http://20.197.31.247/api/";
     }
 
   }
 
-  static final networkOptions = BaseOptions(
-    baseUrl: baseURL,
-    // connectTimeout: 5000,
-    // receiveTimeout: 3000,
-      headers:{
-        Headers.contentTypeHeader: 'application/json',
-      }
-  );
+  static String get mainBaseURL {
+    if (kReleaseMode) {
+      return "http://151.106.113.253/";
+      // return "http://20.197.31.247/api/";
+    } else {
+      return "http://151.106.113.253/";
+      // return "http://20.197.31.247/api/";
+    }
+
+  }
+
 
 }

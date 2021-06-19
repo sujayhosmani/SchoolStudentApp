@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_guardian/Model/Grid.dart';
 
   class Utils {
     static const Color scaffold = Color(0xFFF0F2F5);
@@ -17,6 +18,25 @@ import 'package:flutter/material.dart';
       end: Alignment.bottomCenter,
       colors: [Colors.transparent, Colors.black87],
     );
+
+    static getSubColor(String sub){
+      if(sub.toLowerCase().contains(("kan"))){
+        return fromHex("#7b9acf");
+      }else if(sub.toLowerCase().contains(("hin"))){
+        return fromHex("#f5c268");
+      }else if(sub.toLowerCase().contains(("eng"))){
+        return fromHex("#66c8c6");
+      }else if(sub.toLowerCase().contains(("mat"))){
+        return fromHex("#f8a3b8");
+      }else if(sub.toLowerCase().contains(("sci"))){
+        return fromHex("#faad91");
+      }else if(sub.toLowerCase().contains(("soc"))){
+        return fromHex("#7391c3");
+      }else{
+        return fromHex("#faad91");
+      }
+
+    }
     
 
     static  LinearGradient btnGradient = LinearGradient(
@@ -30,5 +50,16 @@ import 'package:flutter/material.dart';
       if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');
       buffer.write(hexString.replaceFirst('#', ''));
       return Color(int.parse(buffer.toString(), radix: 16));
+    }
+    
+    static List<GridModel> getGrids(){
+      List<GridModel> grid = [
+          new GridModel(title: "Today Classes", des: "", image: "assets/images/presentation.png"),
+          new GridModel(title: "Time Table", des: "", image: "assets/images/timetable.png"),
+          new GridModel(title: "Attendance", des: "", image: "assets/images/attendance.png"),
+        new GridModel(title: "Assignments", des: "", image: "assets/images/attendance.png"),
+
+      ];
+      return grid;
     }
   }

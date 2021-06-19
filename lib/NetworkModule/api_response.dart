@@ -21,3 +21,26 @@ class CustomResponse<T> {
       };
 
 }
+
+class CustomRequest<T> {
+
+  T Data;
+
+
+  CustomRequest({this.Data});
+
+  factory CustomRequest.fromJson(Map<String, dynamic> json) {
+    return CustomRequest(
+
+
+        Data: json['Data']
+    );
+  }
+
+  Map<String, dynamic> toJson() =>
+      {
+
+        'Data': Data,
+      };
+
+}

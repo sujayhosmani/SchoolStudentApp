@@ -34,39 +34,38 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       body: Stack(
         children: [
-          SingleChildScrollView(
-            child: Container(
-              margin: EdgeInsets.only(top: 100),
-              width: double.infinity,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset("assets/images/clogo.png", height: 100,),
-                  SizedBox(height: 5,),
-                  Text("My guardian", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87),),
-                  SizedBox(height: 30,),
+          Container(
+            // margin: EdgeInsets.only(top: 100),
+            width: double.infinity,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: 100,),
+                Image.asset("assets/images/clogo.png", height: 100,),
+                SizedBox(height: 5,),
+                Text("My guardian", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87),),
+                SizedBox(height: 30,),
 
-                  SizedBox(height: 10,),
-                  InputText(title: "Enter Username", mCtrl: mUserName,),
-                  InputText(title: "Password",isPassword: true,mCtrl: mPassword,),
-                  SizedBox(height: 20,),
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
+                SizedBox(height: 10,),
+                InputText(title: "Enter Username", mCtrl: mUserName,),
+                InputText(title: "Password",isPassword: true,mCtrl: mPassword,),
+                SizedBox(height: 20,),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
 
-                      ),
-                      onPressed: (){onLoginClicked(context);},
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
-                        child: Text("Login"),
-                      ))
+                    ),
+                    onPressed: (){onLoginClicked(context);},
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
+                      child: Text("Login"),
+                    )),
+                SizedBox(height: 80,),
 
-                ],
-              ),
+              ],
             ),
           ),
           Consumer<GlobalProvider>(builder: (context, global, child){
-            print(global.error);
             return LoadingScreen(isBusy: global.isBusy,error: global?.error,);
           })
         ],

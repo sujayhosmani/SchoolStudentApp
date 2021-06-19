@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_guardian/Screens/HomeScreen/Components/home_screen.dart';
 import 'package:my_guardian/Screens/ProfileScreen/Component/profile_screen.dart';
+
 
 
 class NavScreen extends StatefulWidget {
@@ -12,10 +14,7 @@ class _NavScreenState extends State<NavScreen> {
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   List<Widget> _widgetOptions = <Widget>[
-   Text("1"),
-    Text("2"),
-    Text("3"),
-    Text('Index 3: Settings', style: optionStyle,),
+    HomeScreen(),
     ProfileScreen(),
   ];
 
@@ -28,27 +27,12 @@ class _NavScreenState extends State<NavScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+      body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'School',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'Student',
-
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.directions_bus_sharp),
-            label: 'Vehicle',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

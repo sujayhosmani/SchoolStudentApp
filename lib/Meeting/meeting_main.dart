@@ -6,16 +6,19 @@ import 'package:flutter/material.dart';
 import 'package:jitsi_meet/jitsi_meet.dart';
 
 class Meeting extends StatefulWidget {
+  final String roomId;
+  final String name;
+
+  const Meeting({Key key, @required this.roomId, @required this.name}) : super(key: key);
   @override
   _MeetingState createState() => _MeetingState();
 }
 
 class _MeetingState extends State<Meeting> {
   final serverText = TextEditingController();
-  final roomText = TextEditingController(text: "plugintestroom");
-  final subjectText = TextEditingController(text: "My Plugin Test Meeting");
-  final nameText = TextEditingController(text: "Plugin Test User");
-  final emailText = TextEditingController(text: "fake@email.com");
+  final roomText = TextEditingController();
+  final nameText = TextEditingController();
+  // final emailText = TextEditingController(text: "fake@email.com");
   final iosAppBarRGBAColor =
   TextEditingController(text: "#0080FF80"); //transparent blue
   bool isAudioOnly = true;
@@ -30,6 +33,13 @@ class _MeetingState extends State<Meeting> {
         onConferenceJoined: _onConferenceJoined,
         onConferenceTerminated: _onConferenceTerminated,
         onError: _onError));
+
+    roomText.text = widget.roomId;
+    nameText.text = widget.name;
+    print("initialting");
+    _joinMeeting();
+
+
   }
 
   @override
@@ -41,45 +51,43 @@ class _MeetingState extends State<Meeting> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Online Class'),
+      ),
+      body: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 16.0,
         ),
-        body: Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16.0,
-          ),
-          child: kIsWeb
-              ? Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                width: width * 0.30,
-                child: meetConfig(),
-              ),
-              Container(
-                  width: width * 0.60,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Card(
-                        color: Colors.white54,
-                        child: SizedBox(
-                          width: width * 0.60 * 0.70,
-                          height: width * 0.60 * 0.70,
-                          child: JitsiMeetConferencing(
-                            extraJS: [
-                              // extraJs setup example
-                              '<script>function echo(){console.log("echo!!!")};</script>',
-                              '<script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>'
-                            ],
-                          ),
-                        )),
-                  ))
-            ],
-          )
-              : meetConfig(),
-        ),
+        child: kIsWeb
+            ? Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              width: width * 0.30,
+              child: meetConfig(),
+            ),
+            Container(
+                width: width * 0.60,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                      color: Colors.white54,
+                      child: SizedBox(
+                        width: width * 0.60 * 0.70,
+                        height: width * 0.60 * 0.70,
+                        child: JitsiMeetConferencing(
+                          extraJS: [
+                            // extraJs setup example
+                            '<script>function echo(){console.log("echo!!!")};</script>',
+                            '<script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>'
+                          ],
+                        ),
+                      )),
+                ))
+          ],
+        )
+            : meetConfig(),
       ),
     );
   }
@@ -91,100 +99,29 @@ class _MeetingState extends State<Meeting> {
           SizedBox(
             height: 16.0,
           ),
-          TextField(
-            controller: serverText,
-            decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: "Server URL",
-                hintText: "Hint: Leave empty for meet.jitsi.si"),
-          ),
+          // TextField(
+          //   controller: serverText,
+          //   decoration: InputDecoration(
+          //       border: OutlineInputBorder(),
+          //       labelText: "Server URL",
+          //       hintText: "Hint: Leave empty for meet.jitsi.si"),
+          // ),
           SizedBox(
             height: 14.0,
           ),
-          TextField(
-            controller: roomText,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: "Room",
-            ),
-          ),
+          SelectableText(roomText.text),
           SizedBox(
             height: 14.0,
           ),
-          TextField(
-            controller: subjectText,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: "Subject",
-            ),
-          ),
           SizedBox(
-            height: 14.0,
-          ),
-          TextField(
-            controller: nameText,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: "Display Name",
-            ),
-          ),
-          SizedBox(
-            height: 14.0,
-          ),
-          TextField(
-            controller: emailText,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: "Email",
-            ),
-          ),
-          SizedBox(
-            height: 14.0,
-          ),
-          TextField(
-            controller: iosAppBarRGBAColor,
-            decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: "AppBar Color(IOS only)",
-                hintText: "Hint: This HAS to be in HEX RGBA format"),
-          ),
-          SizedBox(
-            height: 14.0,
-          ),
-          CheckboxListTile(
-            title: Text("Audio Only"),
-            value: isAudioOnly,
-            onChanged: _onAudioOnlyChanged,
-          ),
-          SizedBox(
-            height: 14.0,
-          ),
-          CheckboxListTile(
-            title: Text("Audio Muted"),
-            value: isAudioMuted,
-            onChanged: _onAudioMutedChanged,
-          ),
-          SizedBox(
-            height: 14.0,
-          ),
-          CheckboxListTile(
-            title: Text("Video Muted"),
-            value: isVideoMuted,
-            onChanged: _onVideoMutedChanged,
-          ),
-          Divider(
-            height: 48.0,
-            thickness: 2.0,
-          ),
-          SizedBox(
-            height: 64.0,
+            height: 54.0,
             width: double.maxFinite,
             child: ElevatedButton(
               onPressed: () {
                 _joinMeeting();
               },
               child: Text(
-                "Join Meeting",
+                "Enter Meeting",
                 style: TextStyle(color: Colors.white),
               ),
               style: ButtonStyle(
@@ -240,9 +177,9 @@ class _MeetingState extends State<Meeting> {
     // Define meetings options here
     var options = JitsiMeetingOptions(room: roomText.text)
       ..serverURL = serverUrl
-      ..subject = subjectText.text
+      // ..subject = subjectText.text
       ..userDisplayName = nameText.text
-      ..userEmail = emailText.text
+    // ..userEmail = emailText.text
       ..iosAppBarRGBAColor = iosAppBarRGBAColor.text
       ..audioOnly = isAudioOnly
       ..audioMuted = isAudioMuted
@@ -290,6 +227,7 @@ class _MeetingState extends State<Meeting> {
 
   void _onConferenceTerminated(message) {
     debugPrint("_onConferenceTerminated broadcasted with message: $message");
+    Navigator.pop(context);
   }
 
   _onError(error) {

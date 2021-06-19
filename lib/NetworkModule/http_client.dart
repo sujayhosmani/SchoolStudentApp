@@ -16,8 +16,9 @@ class HttpClient {
 
   Future<CustomResponse> fetchData(BuildContext context, String url, {Map<String, String> params}) async {
     CustomResponse responseJson;
-    Provider.of<GlobalProvider>(context, listen: false).setIsBusy(true, null);
+    context != null ? Provider.of<GlobalProvider>(context, listen: false).setIsBusy(true, null) : print("context null");
     var uri = APIBase.baseURL + url + ((params != null) ? this.queryParameters(params) : "");
+    print("url: " + uri);
     var header = {HttpHeaders.contentTypeHeader: 'application/json'};
     try {
       final response = await http.get(Uri.parse(uri), headers: header);
@@ -25,7 +26,7 @@ class HttpClient {
     }catch(e){
       responseJson = CustomResponse(Data: null, Status: 0, Error: "Internal Error: " + e.message.toString());
     }
-    Provider.of<GlobalProvider>(context, listen: false).setIsBusy(false, responseJson.Error);
+    context != null ? Provider.of<GlobalProvider>(context, listen: false).setIsBusy(false, responseJson.Error): print("c null");
     return responseJson;
   }
 
@@ -43,13 +44,12 @@ class HttpClient {
     var header = {HttpHeaders.contentTypeHeader: 'application/json'};
     try {
       final response = await http.post(Uri.parse(APIBase.baseURL + url), body: body, headers: header);
+      print(response.statusCode);
       responseJson = _returnResponse(response);
     }catch(e){
       responseJson = CustomResponse(Data: null, Status: 0, Error: "Internal Error: " + e.message.toString());
     }
-    if (responseJson.Error != null){
-      Provider.of<GlobalProvider>(context, listen: false).setIsBusy(false, responseJson.Error);
-    }
+    context != null ? Provider.of<GlobalProvider>(context, listen: false).setIsBusy(false, responseJson.Error): print("c null");
     return responseJson;
   }
 
@@ -67,6 +67,8 @@ class HttpClient {
       case 401:
       case 403:
       return CustomResponse(Data: null, Status: 0, Error: "Unauthorized: " + response.body.toString());
+      case 404:
+        return CustomResponse(Data: null, Status: 0, Error: "Not Found: " + response.body.toString());
       case 500:
       default:
         try{

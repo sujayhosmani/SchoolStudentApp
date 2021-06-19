@@ -16,12 +16,18 @@ class GlobalProvider with ChangeNotifier {
   setIsBusy(bool val, String error){
     _isBusy = val;
     _error = error;
-    print(error);
     refresh();
   }
 
   refresh(){
-    notifyListeners();
+    try{
+      Future.delayed(Duration.zero, () async {
+        notifyListeners();
+      });
+
+    }catch(e){
+
+    }
   }
 
   reset(){
