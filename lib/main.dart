@@ -16,7 +16,6 @@ import 'Helpers/auth_service.dart';
 import 'Meeting/meeting_main.dart';
 import 'Providers/global_provider.dart';
 import 'Providers/student_provider.dart';
-import 'Screens/AssignmentScreen/Widgets/image_upload.dart';
 import 'Screens/NavScreen/Component/nav_screen.dart';
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
@@ -88,7 +87,7 @@ class _MyAppState extends State<MyApp> {
       // If `onMessage` is triggered with a notification, construct our own
       // local notification to show to users using the created channel.
       if (notification != null && android != null) {
-        print("received notificTION");
+        print("received notificTION " + message.data.toString());
         flutterLocalNotificationsPlugin.show(
             notification.hashCode,
             notification.title,
