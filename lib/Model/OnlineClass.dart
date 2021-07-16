@@ -1,7 +1,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-@JsonSerializable()
+// @JsonSerializable()
 class OnlineClass{
   final String Id;
   final String CurrentDate;

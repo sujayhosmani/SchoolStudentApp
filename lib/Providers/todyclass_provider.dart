@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:my_guardian/Model/Attendance.dart';
 import 'package:my_guardian/Model/OnlineClass.dart';
+import 'package:my_guardian/Model/OverAll.dart';
 import 'package:my_guardian/Model/Student.dart';
 import 'package:my_guardian/Model/SubjectModel.dart';
 import 'package:my_guardian/Model/TimeTable.dart';
@@ -19,7 +20,9 @@ class TodayClassProvider with ChangeNotifier {
   List<TimeTable> _todayClass;
   List<TimeTable> _upClass;
   List<SubjectModel> _allSubjects;
+  List<OverAll> _overAll;
 
+  List<OverAll> get overAll => _overAll;
   List<TimeTable> get todayClass => _todayClass;
   List<TimeTable> get upClass => _upClass;
   List<SubjectModel> get allSubjects => _allSubjects;
@@ -54,7 +57,15 @@ class TodayClassProvider with ChangeNotifier {
       notifyListeners();
     }
     return res;
+  }
 
+  fetchAttendance(BuildContext context) async {
+    Student stu = Provider.of<StudentProvider>(context, listen: false).student.Data;
+    CustomResponse<List<OverAll>> res = await _todayClassRepository.fetchAttendance(context, stu.Class, stu.Section, stu.Id);
+    if(res.Status == 1){
+      _overAll = res.Data;
+      notifyListeners();
+    }
   }
 
   fetchSubjects(BuildContext context) async {

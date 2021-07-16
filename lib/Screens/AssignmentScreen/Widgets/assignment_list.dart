@@ -39,8 +39,21 @@ class AssignmentList extends StatelessWidget {
                   child: Container(
                     margin: const EdgeInsets.symmetric(vertical: 1, horizontal: 5),
                     child: Card(
+                      elevation: 0,
                       child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 9),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.shade300,
+                              blurRadius: 6,
+                              offset: Offset(1,2)
+                            )
+                          ]
+                        ),
+
+                        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
                         child: Row(
                           children: [
                             Expanded(

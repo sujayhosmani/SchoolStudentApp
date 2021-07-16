@@ -13,6 +13,9 @@
 
 # Keep our interfaces so they can be used by other ProGuard rules.
 # See http://sourceforge.net/p/proguard/bugs/466/
+
+-keep class com.dexterous.** { *; }
+
 -keep,allowobfuscation @interface com.facebook.proguard.annotations.DoNotStrip
 -keep,allowobfuscation @interface com.facebook.proguard.annotations.KeepGettersAndSetters
 -keep,allowobfuscation @interface com.facebook.common.internal.DoNotStrip

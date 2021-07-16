@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'Address.dart';
 
 
-@JsonSerializable()
+// @JsonSerializable()
 class Teacher{
   final String Id;
   final String TeacherId;
@@ -35,7 +35,7 @@ class Teacher{
   Map<String, dynamic> toJson() => _$TeacherToJson(this);
 }
 
-@JsonSerializable()
+// @JsonSerializable()
 class TeacherSubjects
 {
   final String subject;
@@ -48,7 +48,7 @@ class TeacherSubjects
   Map<String, dynamic> toJson() => _$TeacherSubjectsToJson(this);
 }
 
-@JsonSerializable()
+
 class TeacherClasses
 {
   final String Std;

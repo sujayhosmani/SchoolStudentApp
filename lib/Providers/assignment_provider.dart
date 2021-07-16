@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:ffi';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -10,11 +7,9 @@ import 'package:my_guardian/Model/Student.dart';
 import 'package:my_guardian/Model/SubmitAssignment.dart';
 import 'package:my_guardian/NetworkModule/api_base.dart';
 import 'package:my_guardian/NetworkModule/api_response.dart';
-import 'package:my_guardian/Providers/global_provider.dart';
 import 'package:my_guardian/Providers/student_provider.dart';
 import 'package:my_guardian/Repositories/student_repo.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 
 class AssignmentProvider with ChangeNotifier {

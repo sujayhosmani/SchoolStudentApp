@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-@JsonSerializable()
+// @JsonSerializable()
 class Attendance{
   final String Id;
   final String OnlineClassId;

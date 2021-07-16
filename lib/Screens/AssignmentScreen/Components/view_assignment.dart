@@ -86,7 +86,6 @@ class _ViewAssignmentState extends State<ViewAssignment> {
                     ),
                   ),
                   Divider(),
-
                   Consumer<AssignmentProvider>(builder: (context, imgPro, child){
                     return imgPro.images.length > 0 ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

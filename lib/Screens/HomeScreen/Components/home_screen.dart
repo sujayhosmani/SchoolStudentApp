@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_guardian/Helpers/Utils.dart';
 import 'package:my_guardian/Providers/student_provider.dart';
+import 'package:my_guardian/Screens/AnnouncementScreen/announcement_main.dart';
 import 'package:my_guardian/Screens/AssignmentScreen/Components/assignment_home.dart';
+import 'package:my_guardian/Screens/AttendanceScreen/Components/attendance_home.dart';
 import 'package:my_guardian/Screens/HomeScreen/Widgets/grid_main.dart';
 import 'package:my_guardian/Screens/TimeTable/time_table_home.dart';
 import 'package:my_guardian/Screens/TodayClass/Component/todat_class.dart';
@@ -160,8 +162,14 @@ class _HomeScreenState extends State<HomeScreen> {
         case 1: {
           return TimeTableHome();
         }
+        case 2: {
+          return AttendanceHome();
+        }
         case 3: {
           return AssignmentHome();
+        }
+        case 4: {
+          return AnnouncementHome();
         }
         default:{
           return TodayClassScreen();

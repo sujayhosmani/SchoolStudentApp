@@ -1,14 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:my_guardian/Model/Student.dart';
+import 'package:my_guardian/Model/TimeTable.dart';
+import 'package:my_guardian/NetworkModule/api_response.dart';
+import 'package:my_guardian/Providers/student_provider.dart';
+import 'package:my_guardian/Repositories/student_repo.dart';
+import 'package:provider/provider.dart';
 
 
 class TimeTableProvider with ChangeNotifier {
   int selectedIndex = 0;
+  StudentRepository _studentRepository;
   List<String> headerArray = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   ScrollController controller = ScrollController();
+  List<TimeTable> timeTable;
 
   TimeTableProvider() {
+    _studentRepository = StudentRepository();
     selectedIndex = 0;
+
   }
+
+  fetchTimeTable(BuildContext context, from) async{
+    if (timeTable == null){
+      Student stu = Provider.of<StudentProvider>(context, listen: false).student.Data;
+      CustomResponse<List<TimeTable>> todayTimeTable = await _studentRepository.fetchTimeTable(context,from, stu.Class, stu.Section);
+      timeTable = todayTimeTable?.Data;
+      timeTable?.sort((a, b) => a.FromTime.compareTo(b.FromTime));
+      notifyListeners();
+    }
+  }
+
+
 
   onChangeWeek(int index){
     selectedIndex = index;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_guardian/Helpers/Utils.dart';
 import 'package:my_guardian/Model/TimeTable.dart';
 import 'package:my_guardian/Providers/todyclass_provider.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +40,7 @@ class ShowTodayClassList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return timeTable == null ? SizedBox.shrink() : timeTable.length == 0 ?  SizedBox.shrink() :
+    return timeTable == null ? SizedBox.shrink() : timeTable.length == 0 ?  Text("No classes for today! enjoy your holiday", style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600)) :
     Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -72,7 +73,7 @@ class ShowTodayClassList extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(timeTable[index].FromTime + " - " + timeTable[index].EndTime),
+                              Text(Utils.convertTime(timeTable[index].FromTime) + " - " + Utils.convertTime(timeTable[index].EndTime)),
 
                             ],
                           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_guardian/Helpers/Utils.dart';
 import 'package:my_guardian/Model/Assignment.dart';
 import 'package:my_guardian/Providers/assignment_provider.dart';
 import 'package:my_guardian/Screens/AssignmentScreen/Components/view_assignment.dart';
@@ -27,7 +28,9 @@ class _AssignmentHomeState extends State<AssignmentHome> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
+        backgroundColor: Utils.fromHex("#fff8fa"),
         appBar: AppBar(
           title: Text("Assignment"),
           // leadingWidth: 25,

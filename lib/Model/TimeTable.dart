@@ -2,7 +2,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 
-@JsonSerializable()
+// @JsonSerializable()
 class TimeTable{
   final String Id;
   final String Std;
@@ -22,7 +22,7 @@ class TimeTable{
 
 }
 
-@JsonSerializable()
+// @JsonSerializable()
 class WeekSubjects{
    String Week;
    String CTSId;

@@ -6,7 +6,10 @@ enum APIPath {
   getAllSubjects,
   getAssignmentsBySid,
   getSubmittedAssignment,
-  add_submittedAssignment
+  add_submittedAssignment,
+  getAnnouncement,
+  fetch_time_table,
+  fetch_attendance,
 }
 
 class APIPathHelper{
@@ -16,6 +19,12 @@ class APIPathHelper{
         return "school/getByPh/" + param;
       case APIPath.fetch_today:
         return "TimeTable/GetTodayClassStudent" + param;
+      case APIPath.fetch_time_table:
+        return "TimeTable/getTimeTable" + param;
+      case APIPath.fetch_attendance:
+        return "TimeTable/GetAttendance" + param;
+      case APIPath.getAnnouncement:
+        return "announcement/getAAnnouncement" + param;
       case APIPath.add_attendance:
         return "timetable/AddAttendance";
       case APIPath.getAllSubjects:

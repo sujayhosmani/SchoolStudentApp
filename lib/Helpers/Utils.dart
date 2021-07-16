@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:my_guardian/Model/Grid.dart';
 
   class Utils {
@@ -37,6 +38,25 @@ import 'package:my_guardian/Model/Grid.dart';
       }
 
     }
+
+    static getCatColor(String sub){
+      if(sub.toLowerCase().contains(("aca"))){
+        return  Colors.blue.shade300;
+      }else if(sub.toLowerCase().contains(("spor"))){
+        return Colors.orange.shade300;
+      }else if(sub.toLowerCase().contains(("sub"))){
+        return Colors.red.shade300;
+      }else if(sub.toLowerCase().contains(("exa"))){
+        return Colors.brown.shade300;
+      }else if(sub.toLowerCase().contains(("fee"))){
+        return Colors.purple.shade300;
+      }else if(sub.toLowerCase().contains(("othe"))){
+        return Colors.blue.shade300;
+      }else{
+        return Colors.blue.shade300;
+      }
+
+    }
     
 
     static  LinearGradient btnGradient = LinearGradient(
@@ -44,6 +64,12 @@ import 'package:my_guardian/Model/Grid.dart';
       end: Alignment(1.0, 4.0),
       colors: [fromHex("#FFA81D"), fromHex("#F45C43")],
     );
+
+    static String convertTime(String dateTime){
+      DateTime tempDate = new DateFormat("hh:mm").parse(dateTime);
+      String s = DateFormat("h:mm a").format(tempDate);
+      return s;
+    }
 
     static Color fromHex(String hexString) {
       final buffer = StringBuffer();
@@ -58,6 +84,8 @@ import 'package:my_guardian/Model/Grid.dart';
           new GridModel(title: "Time Table", des: "", image: "assets/images/timetable.png"),
           new GridModel(title: "Attendance", des: "", image: "assets/images/attendance.png"),
         new GridModel(title: "Assignments", des: "", image: "assets/images/attendance.png"),
+        new GridModel(title: "Announcement", des: "", image: "assets/images/timetable.png"),
+        new GridModel(title: "Digital Library", des: "", image: "assets/images/timetable.png"),
 
       ];
       return grid;

@@ -2,7 +2,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-@JsonSerializable()
+// @JsonSerializable()
 class SubjectModel{
   final String Id;
 final int SubjectCode;
