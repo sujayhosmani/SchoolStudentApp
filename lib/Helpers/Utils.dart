@@ -80,12 +80,24 @@ import 'package:my_guardian/Model/Grid.dart';
     
     static List<GridModel> getGrids(){
       List<GridModel> grid = [
-          new GridModel(title: "Today Classes", des: "", image: "assets/images/presentation.png"),
+          new GridModel(title: "Today Classes", des: "", image: "assets/images/online_class_icon.png"),
           new GridModel(title: "Time Table", des: "", image: "assets/images/timetable.png"),
           new GridModel(title: "Attendance", des: "", image: "assets/images/attendance.png"),
-        new GridModel(title: "Assignments", des: "", image: "assets/images/attendance.png"),
-        new GridModel(title: "Announcement", des: "", image: "assets/images/timetable.png"),
-        new GridModel(title: "Digital Library", des: "", image: "assets/images/timetable.png"),
+          new GridModel(title: "Assignments", des: "", image: "assets/images/assignment_icon.png"),
+          new GridModel(title: "Announcement", des: "", image: "assets/images/announce_icon.png"),
+          new GridModel(title: "Digital Library", des: "", image: "assets/images/library_icon.png"),
+          new GridModel(title: "E-books", des: "", image: "assets/images/book_icon.png"),
+          new GridModel(title: "Bus Tracking", des: "", image: "assets/images/bus_icon.png"),
+          new GridModel(title: "Fees", des: "", image: "assets/images/fee_icon.png"),
+          new GridModel(title: "Leave application", des: "", image: "assets/images/leave_icon.png"),
+          new GridModel(title: "Staff Info", des: "", image: "assets/images/staff_icon.png"),
+          new GridModel(title: "Learn zone", des: "", image: "assets/images/learn_icon.png"),
+          new GridModel(title: "Gallery", des: "", image: "assets/images/gallery_icon.png"),
+          new GridModel(title: "Online Test", des: "", image: "assets/images/online_test_icon.png"),
+
+
+
+
 
       ];
       return grid;

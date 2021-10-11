@@ -4,6 +4,7 @@ import 'package:my_guardian/Providers/student_provider.dart';
 import 'package:my_guardian/Screens/AnnouncementScreen/announcement_main.dart';
 import 'package:my_guardian/Screens/AssignmentScreen/Components/assignment_home.dart';
 import 'package:my_guardian/Screens/AttendanceScreen/Components/attendance_home.dart';
+import 'package:my_guardian/Screens/ComingSoonScreen/coming_soon.dart';
 import 'package:my_guardian/Screens/HomeScreen/Widgets/grid_main.dart';
 import 'package:my_guardian/Screens/TimeTable/time_table_home.dart';
 import 'package:my_guardian/Screens/TodayClass/Component/todat_class.dart';
@@ -35,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text("Home", style: TextStyle(color: Colors.black87),),
         centerTitle: false,
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFFD4E7FE),
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -154,6 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void onClicked(val) {
+    print(val);
     Navigator.push(context, MaterialPageRoute(builder: (BuildContext context){
       switch(val){
         case 0: {
@@ -172,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
           return AnnouncementHome();
         }
         default:{
-          return TodayClassScreen();
+          return ComingSoonScreen();
         }
       }
     }));
